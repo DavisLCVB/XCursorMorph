@@ -2,9 +2,11 @@
 #ifndef XCURSOR_MORPH_LIB
 #define XCURSOR_MORPH_LIB
 
+#include <types.hpp>
+
 class XCursorMorph {
  public:
-  int run(int argc, char* argv[]);
+  i32 run(i32 argc, c8* argv[]);
 };
 
 #endif  // XCURSOR_MORPH_LIB
