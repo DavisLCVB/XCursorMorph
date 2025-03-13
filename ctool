@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# Uso: $0 ./source/path/to/class [-h|-s] [-d]
+#  -h: opera sobre el archivo header (.hpp) únicamente.
+#  -s: opera sobre el archivo source (.cpp) únicamente.
+#  -d: elimina en lugar de crear.
+
+if [ "$#" -lt 1 ] || [ "$#" -gt 3 ]; then
+  echo "Uso: $0 ./source/path/to/class [-h|-s] [-d]"
+  exit 1
+fi
+
+full_path="$1"
+directory=$(dirname "$full_path")
+class_name=$(basename "$full_path")
+
+mkdir -p "$directory"
+
+file_mode="both"
+delete_flag="false"
+
+
+shift 1
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    -d)
+      delete_flag="true"
+      ;;
+    -h)
+      if [ "$file_mode" != "both" ]; then
+         echo "Error: solo puede especificarse un flag de archivo (-h o -s)."
+         exit 1
+      fi
+      file_mode="header"
+      ;;
+    -s)
+      if [ "$file_mode" != "both" ]; then
+         echo "Error: solo puede especificarse un flag de archivo (-h o -s)."
+         exit 1
+      fi
+      file_mode="source"
+      ;;
+    *)
+      echo "Uso: $0 ./source/path/to/class [-h|-s] [-d]"
+      exit 1
+      ;;
+  esac
+  shift
+done
+
+header_file="$directory/${class_name}.hpp"
+source_file="$directory/${class_name}.cpp"
+
+GREEN='\e[32m'
+RED='\e[31m'
+NC='\e[0m'
+
+if [ "$delete_flag" == "true" ]; then
+  # Eliminación de archivos
+  if [ "$file_mode" == "header" ] || [ "$file_mode" == "both" ]; then
+    if [ -f "$header_file" ]; then
+      rm "$header_file"
+      echo -e "${RED}Eliminado:${NC} ${header_file}"
+    else
+      echo "No se encontró el archivo ${header_file}"
+    fi
+  fi
+  if [ "$file_mode" == "source" ] || [ "$file_mode" == "both" ]; then
+    if [ -f "$source_file" ]; then
+      rm "$source_file"
+      echo -e "${RED}Eliminado:${NC} ${source_file}"
+    else
+      echo "No se encontró el archivo ${source_file}"
+    fi
+  fi
+else
+  # Creación de archivos
+  if [ "$file_mode" == "header" ] || [ "$file_mode" == "both" ]; then
+      touch "$header_file"
+      echo -e "${GREEN}Creado:${NC} ${header_file}"
+  fi
+  if [ "$file_mode" == "source" ] || [ "$file_mode" == "both" ]; then
+      touch "$source_file"
+      echo -e "${GREEN}Creado:${NC} ${source_file}"
+  fi
+fi
