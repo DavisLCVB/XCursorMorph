@@ -8,6 +8,7 @@ class StaticCursorTest final : public QObject {
  private slots:
   void testFromData();
   void testFromPath();
+  void testToPng();
 };
 
 #endif  // STATIC_CURSOR_TEST_H

@@ -8,6 +8,8 @@ enum class XErrorType {
   FileNotFound,
   FileNotOpened,
   InvalidData,
+  NotSupported,
+  CreationFailed,
   Unknown,
 };
 

@@ -61,13 +61,5 @@ void StaticCursor::__readEntries() {
     auto entry = CursorEntry{w, h, hx, hy, size, off};
     entry.setData(__data.mid(off, size));
     __entries.append(entry);
-    const QString message = QString("Entry %1: %2x%3, hotspot: %4x%5, size: %6")
-                                .arg(index)
-                                .arg(w)
-                                .arg(h)
-                                .arg(hx)
-                                .arg(hy)
-                                .arg(size);
-    qDebug() << message;
   }
 }

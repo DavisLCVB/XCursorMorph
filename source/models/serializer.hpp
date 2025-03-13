@@ -13,7 +13,7 @@ class Serializer {
   template <typename... Ts>
   static QByteArray pack(const Tuple<Ts...>& tuple) {
     QByteArray data;
-    QDataStream stream(&data);
+    QDataStream stream(&data, QIODevice::WriteOnly);
     stream.setByteOrder(QDataStream::LittleEndian);
     std::apply([&](const auto&... args) { ((stream << args), ...); }, tuple);
     return data;
