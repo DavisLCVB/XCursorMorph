@@ -13,7 +13,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic")
 
 find_package(Qt6 COMPONENTS Core Widgets Gui REQUIRED)
 
-file(GLOB LIB_SOURCES "source/*.cpp" "source/*.hpp" "source/*.ui" "assets/assets.qrc")
+file(GLOB_RECURSE LIB_SOURCES "source/*.cpp" "source/*.hpp" "source/*.ui" "assets/assets.qrc")
 list(REMOVE_ITEM LIB_SOURCES "${CMAKE_SOURCE_DIR}/source/main.cpp")
 set(EXE_SOURCES "source/main.cpp")
 set(LIB_NAME "${PROJECT_NAME}-lib")

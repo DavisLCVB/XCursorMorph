@@ -15,10 +15,10 @@ class XCursorMorph {
 
   XCursorMorph(XCursorMorph&&) = delete;
   XCursorMorph& operator=(XCursorMorph&&) = delete;
+  ~XCursorMorph() = default;
 
  protected:
   XCursorMorph() = default;
-  ~XCursorMorph() = default;
 
  private:
   static std::unique_ptr<XCursorMorph> __instance;

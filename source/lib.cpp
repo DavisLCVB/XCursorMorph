@@ -2,7 +2,10 @@
 #include <QApplication>
 #include <QDebug>
 #include <metadata/meta.hpp>
+#include <models/static-cursor.hpp>
 #include <mutex>
+
+std::unique_ptr<XCursorMorph> XCursorMorph::__instance = nullptr;
 
 XCursorMorph& XCursorMorph::instance() {
   static std::once_flag __once;

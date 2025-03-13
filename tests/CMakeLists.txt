@@ -1,6 +1,5 @@
 find_package(Qt6 COMPONENTS Test REQUIRED)
-file(GLOB TEST_SOURCES "*.cpp")
+file(GLOB TEST_SOURCES "main.test.cpp" "models.test/static-cursor.test.cpp" "models.test/static-cursor.test.hpp")
 add_executable(tests ${TEST_SOURCES})
-target_link_libraries(tests PRIVATE Qt6::Test)
-target_link_libraries(tests PRIVATE ${LIB_NAME})
+target_link_libraries(tests PRIVATE ${LIB_NAME} Qt6::Test Qt6::Core Qt6::Gui Qt6::Widgets)
 target_include_directories(tests PRIVATE "source")
