@@ -10,6 +10,7 @@ enum class XErrorType {
   InvalidData,
   NotSupported,
   CreationFailed,
+  ReadError,
   Unknown,
 };
 
