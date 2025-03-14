@@ -21,6 +21,9 @@ class XCursorMorph {
   XCursorMorph() = default;
 
  private:
+  void __loadResources();
+
+ private:
   static std::unique_ptr<XCursorMorph> __instance;
 };
 
