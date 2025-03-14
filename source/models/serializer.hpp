@@ -1,5 +1,5 @@
-#ifndef SERIALIZER_H
-#define SERIALIZER_H
+#ifndef SERIALIZER_HPP
+#define SERIALIZER_HPP
 
 #include <QByteArray>
 #include <QDataStream>
@@ -32,4 +32,4 @@ class Serializer {
   Serializer() = delete;
 };
 
-#endif  // SERIALIZER_H
+#endif  // SERIALIZER_HPP

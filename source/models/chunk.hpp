@@ -1,5 +1,5 @@
-#ifndef CHUNK_H
-#define CHUNK_H
+#ifndef CHUNK_HPP
+#define CHUNK_HPP
 
 #include <QDataStream>
 #include <QVector>
@@ -18,4 +18,4 @@ class Chunk {
   void parseSubChunks();
 };
 
-#endif  // CHUNK_H
+#endif  // CHUNK_HPP

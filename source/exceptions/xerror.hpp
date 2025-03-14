@@ -1,5 +1,5 @@
-#ifndef XERROR_H
-#define XERROR_H
+#ifndef XERROR_HPP
+#define XERROR_HPP
 
 #include <QMap>
 #include <QString>
@@ -29,4 +29,4 @@ class XError {
   XErrorType __type;
 };
 
-#endif  // XERROR_H
+#endif  // XERROR_HPP

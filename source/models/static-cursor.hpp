@@ -1,5 +1,5 @@
-#ifndef XSTATIC_CURSOR_H
-#define XSTATIC_CURSOR_H
+#ifndef XSTATIC_CURSOR_HPP
+#define XSTATIC_CURSOR_HPP
 
 #include <QByteArray>
 #include <QString>
@@ -27,4 +27,4 @@ class StaticCursor {
   constexpr static u16 __headerTypeValue{2};
 };
 
-#endif  // XSTATIC_CURSOR_H
+#endif  // XSTATIC_CURSOR_HPP

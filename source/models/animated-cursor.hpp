@@ -1,5 +1,5 @@
-#ifndef XANIMATED_CURSOR_H
-#define XANIMATED_CURSOR_H
+#ifndef XANIMATED_CURSOR_HPP
+#define XANIMATED_CURSOR_HPP
 
 #include <QByteArray>
 #include <QString>
@@ -20,4 +20,4 @@ class AnimatedCursor {
   void __readChunks();
 };
 
-#endif  // XANIMATED_CURSOR_H
+#endif  // XANIMATED_CURSOR_HPP

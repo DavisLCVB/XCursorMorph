@@ -1,5 +1,5 @@
-#ifndef ENTRY_INFO_H
-#define ENTRY_INFO_H
+#ifndef ENTRY_INFO_HPP
+#define ENTRY_INFO_HPP
 
 #include <QByteArray>
 #include <types.hpp>
@@ -42,4 +42,4 @@ class CursorEntry {
   constexpr static u32 __dataOffset{54};
 };
 
-#endif  // ENTRY_INFO_H
+#endif  // ENTRY_INFO_HPP
