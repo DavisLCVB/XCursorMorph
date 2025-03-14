@@ -5,7 +5,7 @@
 #include <models/static-cursor.hpp>
 #include <mutex>
 
-#include <views/screens/select-folder-screen.hpp>
+#include <views/main-window.hpp>
 
 std::unique_ptr<XCursorMorph> XCursorMorph::__instance = nullptr;
 
@@ -18,10 +18,10 @@ XCursorMorph& XCursorMorph::instance() {
 i32 XCursorMorph::run(i32 argc, c8* argv[]) {
   __loadResources();
   QApplication app(argc, argv);
-  qDebug() << Meta::name;
-  qDebug() << "Version: " << Meta::version;
-  SelectFolderScreen screen;
-  screen.show();
+  app.setApplicationName(Meta::name);
+  app.setApplicationVersion(Meta::version);
+  MainWindow window;
+  window.show();
   return app.exec();
 }
 
