@@ -3,4 +3,7 @@
         <file alias="folder:white">icons/folder-white.svg</file>
         <file alias="test:white">icons/test-white.svg</file>
     </qresource> 
+    <qresource>
+        <file alias="favicon">favicon.svg</file>
+    </qresource>
 </RCC>

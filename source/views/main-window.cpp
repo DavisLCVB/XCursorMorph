@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget* parent)
   setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
   setAttribute(Qt::WA_TranslucentBackground);
   ui->TitleLabel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+  ui->IconLabel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
   connect(ui->MinimizeButton, &QPushButton::clicked, this,
           &MainWindow::minimizeWindow);
   connect(ui->MaximizeButton, &QPushButton::clicked, this,
