@@ -40,7 +40,7 @@
      <number>0</number>
     </property>
     <property name="topMargin">
-     <number>0</number>
+     <number>10</number>
     </property>
     <property name="rightMargin">
      <number>0</number>
@@ -73,7 +73,7 @@
         <number>0</number>
        </property>
        <property name="rightMargin">
-        <number>10</number>
+        <number>20</number>
        </property>
        <property name="bottomMargin">
         <number>0</number>
@@ -83,7 +83,7 @@
          <property name="styleSheet">
           <string notr="true"/>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -177,7 +177,7 @@ background: transparent;
 }</string>
       </property>
       <widget class="SelectFolderScreen" name="SelectFolder"/>
-      <widget class="QWidget" name="MainContent"/>
+      <widget class="MainContentScreen" name="MainContent"/>
      </widget>
     </item>
    </layout>
@@ -194,6 +194,12 @@ background: transparent;
    <class>Header</class>
    <extends>QWidget</extends>
    <header location="global">views/components/header.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MainContentScreen</class>
+   <extends>QWidget</extends>
+   <header location="global">views/screens/main-content-screen.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

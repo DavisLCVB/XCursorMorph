@@ -34,7 +34,22 @@
      <property name="styleSheet">
       <string notr="true">background: transparent</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,3">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3,5">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
       <item>
        <widget class="QWidget" name="widget" native="true">
         <property name="minimumSize">
@@ -51,7 +66,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout">
          <property name="leftMargin">
-          <number>10</number>
+          <number>30</number>
          </property>
          <property name="topMargin">
           <number>10</number>
@@ -60,7 +75,7 @@
           <number>10</number>
          </property>
          <property name="bottomMargin">
-          <number>10</number>
+          <number>30</number>
          </property>
          <item>
           <widget class="QWidget" name="ProgressContainer" native="true">
@@ -72,6 +87,66 @@
 	border-color: rgb(127, 132, 156)
 }</string>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,8">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>70</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">font-size: 25px;
+padding-left: 5px;
+font-weight:bold;</string>
+              </property>
+              <property name="text">
+               <string>Progress</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="ListContainer" native="true">
+              <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,1,1,1,1,1,1,1">
+               <item>
+                <widget class="StageButton" name="Stage1" native="true"/>
+               </item>
+               <item>
+                <widget class="StageButton" name="Stage2" native="true"/>
+               </item>
+               <item>
+                <widget class="StageButton" name="Stage3" native="true"/>
+               </item>
+               <item>
+                <widget class="StageButton" name="Stage4" native="true"/>
+               </item>
+               <item>
+                <widget class="StageButton" name="Stage5" native="true"/>
+               </item>
+               <item>
+                <widget class="StageButton" name="Stage6" native="true"/>
+               </item>
+               <item>
+                <widget class="StageButton" name="Stage7" native="true"/>
+               </item>
+               <item>
+                <spacer name="verticalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
         </layout>
@@ -91,6 +166,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>StageButton</class>
+   <extends>QWidget</extends>
+   <header location="global">views/components/stage-button.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

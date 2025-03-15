@@ -2,8 +2,15 @@
     <qresource prefix="/icons">
         <file alias="folder:white">icons/folder-white.svg</file>
         <file alias="test:white">icons/test-white.svg</file>
+        <file alias="arrow:right:white">icons/arrow-right-white.svg</file>
+        <file alias="arrow:right:gray">icons/arrow-right-gray.svg</file>
     </qresource> 
     <qresource>
         <file alias="favicon">favicon.svg</file>
+    </qresource>
+    <qresource prefix="/stages">
+        <file alias="done">icons/done.svg</file>
+        <file alias="in-progress">icons/in-progress.svg</file>
+        <file alias="undone">icons/undone.svg</file>
     </qresource>
 </RCC>

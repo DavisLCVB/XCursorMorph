@@ -4,7 +4,7 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  ui->ContentStack->setCurrentIndex(0);
+  ui->ContentStack->setCurrentIndex(1);
   resize(1200, 800);
   setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
   setAttribute(Qt::WA_TranslucentBackground);
