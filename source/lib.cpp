@@ -5,6 +5,7 @@
 #include <models/static-cursor.hpp>
 #include <mutex>
 
+#include <controllers/main-controller.hpp>
 #include <views/main-window.hpp>
 
 std::unique_ptr<XCursorMorph> XCursorMorph::__instance = nullptr;
@@ -21,6 +22,7 @@ i32 XCursorMorph::run(i32 argc, c8* argv[]) {
   app.setApplicationName(Meta::name);
   app.setApplicationVersion(Meta::version);
   MainWindow window;
+  MainController controller(&window);
   window.show();
   return app.exec();
 }

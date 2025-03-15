@@ -5,8 +5,8 @@
 #include <QString>
 
 namespace Meta {
-QString version{"@PROJECT_VERSION@"};
-QString name{"@PROJECT_NAME@"};
+static QString version{"@PROJECT_VERSION@"};
+static QString name{"@PROJECT_NAME@"};
 };  // namespace Meta
 
 #endif  // XCURSOR_MORPH_META_HPP

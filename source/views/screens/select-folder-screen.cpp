@@ -27,3 +27,19 @@ SelectFolderScreen::SelectFolderScreen(QWidget* parent)
 SelectFolderScreen::~SelectFolderScreen() {
   delete ui;
 }
+
+QLineEdit* SelectFolderScreen::FolderInput() const {
+  return ui->FolderInput;
+}
+
+QPushButton* SelectFolderScreen::AcceptButton() const {
+  return ui->AcceptButton;
+}
+
+QPushButton* SelectFolderScreen::SearchButton() const {
+  return ui->SearchButton;
+}
+
+QLabel* SelectFolderScreen::ErrorLabel() const {
+  return ui->ErrorLabel;
+}

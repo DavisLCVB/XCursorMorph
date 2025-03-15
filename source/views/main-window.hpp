@@ -1,8 +1,12 @@
 #ifndef MAIN_WINDOW_HPP
 #define MAIN_WINDOW_HPP
 
+#include <QLineEdit>
 #include <QMainWindow>
-#include <QMouseEvent>
+#include <QStackedWidget>
+#include <views/components/header-component.hpp>
+#include <views/screens/main-content-screen.hpp>
+#include <views/screens/select-folder-screen.hpp>
 
 namespace Ui {
 class MainWindow;
@@ -14,6 +18,10 @@ class MainWindow : public QMainWindow {
  public:
   explicit MainWindow(QWidget* parent = nullptr);
   ~MainWindow();
+  QStackedWidget* ContentStack() const;
+  SelectFolderScreen* SelectFolder() const;
+  MainContentScreen* MainContent() const;
+  HeaderComponent* Header() const;
 
  private:
   Ui::MainWindow* ui;

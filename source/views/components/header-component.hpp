@@ -6,15 +6,17 @@
 #include <QWidget>
 
 namespace Ui {
-class Header;
+class HeaderComponent;
 }
 
-class Header : public QWidget {
+class HeaderComponent : public QWidget {
   Q_OBJECT
 
  public:
-  explicit Header(QWidget* parent = nullptr);
-  ~Header();
+  explicit HeaderComponent(QWidget* parent = nullptr);
+  ~HeaderComponent();
+  void setTitle(const QString& title);
+  void setIcon(const QString& icon);
 
  protected:
   void mousePressEvent(QMouseEvent* event) override;
@@ -22,7 +24,7 @@ class Header : public QWidget {
   void mouseReleaseEvent(QMouseEvent* event) override;
 
  private:
-  Ui::Header* ui;
+  Ui::HeaderComponent* ui;
   bool __isMooving = false;
   QPoint __lastPosition;
 };

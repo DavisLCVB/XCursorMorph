@@ -79,7 +79,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="Header" name="vHeader" native="true">
+        <widget class="HeaderComponent" name="Header" native="true">
          <property name="styleSheet">
           <string notr="true"/>
          </property>
@@ -177,9 +177,9 @@ background: transparent;
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>Header</class>
+   <class>HeaderComponent</class>
    <extends>QWidget</extends>
-   <header location="global">views/components/header.hpp</header>
+   <header location="global">views/components/header-component.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>

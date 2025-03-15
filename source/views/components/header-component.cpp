@@ -1,17 +1,18 @@
-#include "header.hpp"
-#include "ui_header.h"
+#include "header-component.hpp"
+#include "ui_header-component.h"
 
-Header::Header(QWidget* parent) : QWidget(parent), ui(new Ui::Header) {
+HeaderComponent::HeaderComponent(QWidget* parent)
+    : QWidget(parent), ui(new Ui::HeaderComponent) {
   ui->setupUi(this);
   ui->TitleLabel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
   ui->IconLabel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
 }
 
-Header::~Header() {
+HeaderComponent::~HeaderComponent() {
   delete ui;
 }
 
-void Header::mousePressEvent(QMouseEvent* event) {
+void HeaderComponent::mousePressEvent(QMouseEvent* event) {
   if (event->button() == Qt::LeftButton) {
     __isMooving = true;
     __lastPosition = event->globalPosition().toPoint() - window()->pos();
@@ -19,15 +20,23 @@ void Header::mousePressEvent(QMouseEvent* event) {
   }
 }
 
-void Header::mouseMoveEvent(QMouseEvent* event) {
+void HeaderComponent::mouseMoveEvent(QMouseEvent* event) {
   if (__isMooving && (event->buttons() && Qt::LeftButton)) {
     window()->move(event->globalPosition().toPoint() - __lastPosition);
     event->accept();
   }
 }
 
-void Header::mouseReleaseEvent(QMouseEvent* event) {
+void HeaderComponent::mouseReleaseEvent(QMouseEvent* event) {
   __isMooving = false;
   event->accept();
   setCursor(Qt::ArrowCursor);
+}
+
+void HeaderComponent::setTitle(const QString& title) {
+  ui->TitleLabel->setText(title);
+}
+
+void HeaderComponent::setIcon(const QString& icon) {
+  ui->IconLabel->setPixmap(QPixmap(icon));
 }

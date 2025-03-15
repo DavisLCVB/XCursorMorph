@@ -4,7 +4,7 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
-  ui->ContentStack->setCurrentIndex(1);
+  ui->ContentStack->setCurrentIndex(0);
   resize(1200, 800);
   setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
   setAttribute(Qt::WA_TranslucentBackground);
@@ -34,4 +34,20 @@ void MainWindow::maximizeRestoreWindow() {
 
 void MainWindow::closeWindow() {
   close();
+}
+
+QStackedWidget* MainWindow::ContentStack() const {
+  return ui->ContentStack;
+}
+
+SelectFolderScreen* MainWindow::SelectFolder() const {
+  return ui->SelectFolder;
+}
+
+MainContentScreen* MainWindow::MainContent() const {
+  return ui->MainContent;
+}
+
+HeaderComponent* MainWindow::Header() const {
+  return ui->Header;
 }
