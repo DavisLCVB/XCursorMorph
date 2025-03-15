@@ -1,6 +1,7 @@
 #ifndef STAGE_BUTTON_HPP
 #define STAGE_BUTTON_HPP
 
+#include <QMouseEvent>
 #include <QWidget>
 
 namespace Ui {
@@ -20,6 +21,10 @@ class StageButton : public QWidget {
   void setText(const QString& text);
   QString text() const;
 
+ protected:
+  void mousePressEvent(QMouseEvent* event) override;
+  void mouseReleaseEvent(QMouseEvent* event) override;
+
  private:
   Ui::StageButton* ui;
   StageButtonState __state;
@@ -27,6 +32,7 @@ class StageButton : public QWidget {
   static QMap<StageButtonState, QString> __textStyle;
   static QMap<StageButtonState, QString> __iconStyle;
   static QMap<StageButtonState, QString> __arrowStyle;
+  static QString __pressedStyle;
 };
 
 #endif  // STAGE_BUTTON_HPP
