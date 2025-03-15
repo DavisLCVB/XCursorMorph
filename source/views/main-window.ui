@@ -31,7 +31,7 @@
   <widget class="QWidget" name="Central">
    <property name="styleSheet">
     <string notr="true">QWidget#Central{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(17, 17, 27, 255), stop:1 rgba(43, 45, 72, 255));;
+	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(17, 17, 27, 255), stop:1 rgba(43, 45, 72, 255));
 		border-radius: 20px;
 }</string>
    </property>
@@ -79,11 +79,11 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QWidget" name="Header" native="true">
+        <widget class="Header" name="vHeader" native="true">
          <property name="styleSheet">
           <string notr="true"/>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,10">
+         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -96,42 +96,6 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item>
-           <widget class="QLabel" name="IconLabel">
-            <property name="maximumSize">
-             <size>
-              <width>45</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">padding: 0px 0px 0px 20px;</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="pixmap">
-             <pixmap resource="../../assets/assets.qrc">:/favicon</pixmap>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="TitleLabel">
-            <property name="styleSheet">
-             <string notr="true">font-size: 14pt;
-font-weight: bold;</string>
-            </property>
-            <property name="text">
-             <string>XCursor Morph</string>
-            </property>
-            <property name="pixmap">
-             <pixmap resource="../../assets/assets.qrc">:/favicon</pixmap>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
@@ -226,9 +190,13 @@ background: transparent;
    <header location="global">views/screens/select-folder-screen.hpp</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>Header</class>
+   <extends>QWidget</extends>
+   <header location="global">views/components/header.hpp</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
- <resources>
-  <include location="../../assets/assets.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

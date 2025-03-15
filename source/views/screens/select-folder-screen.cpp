@@ -2,6 +2,9 @@
 #include <views/utils/colors.hpp>
 #include "ui_select-folder-screen.h"
 
+#include <QGraphicsDropShadowEffect>
+#include <views/utils/colors.hpp>
+
 SelectFolderScreen::SelectFolderScreen(QWidget* parent)
     : QWidget(parent), ui(new Ui::SelectFolderScreen) {
   ui->setupUi(this);
@@ -9,6 +12,16 @@ SelectFolderScreen::SelectFolderScreen(QWidget* parent)
   pallete.setColor(QPalette::PlaceholderText, Colors::placeholderText);
   ui->FolderInput->setPalette(pallete);
   ui->AcceptButton->setFocus();
+  QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
+  shadow->setBlurRadius(5);
+  shadow->setOffset(0, 4);
+  shadow->setColor(Colors::buttonColor);
+  ui->AcceptButton->setGraphicsEffect(shadow);
+  QGraphicsDropShadowEffect* shadow2 = new QGraphicsDropShadowEffect(this);
+  shadow2->setBlurRadius(5);
+  shadow2->setOffset(0, 4);
+  shadow2->setColor(Colors::buttonColor);
+  ui->SearchButton->setGraphicsEffect(shadow2);
 }
 
 SelectFolderScreen::~SelectFolderScreen() {
