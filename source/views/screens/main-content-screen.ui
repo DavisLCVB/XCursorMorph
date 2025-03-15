@@ -34,7 +34,7 @@
      <property name="styleSheet">
       <string notr="true">background: transparent</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3,5">
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3,7">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -157,8 +157,13 @@ font-weight:bold;</string>
         <property name="styleSheet">
          <string notr="true">background:transparent;</string>
         </property>
-        <widget class="QWidget" name="page"/>
-        <widget class="QWidget" name="page_2"/>
+        <widget class="ScanStageScreen" name="Stage1Screen"/>
+        <widget class="QWidget" name="Stage2Screen"/>
+        <widget class="QWidget" name="Stage3Screen"/>
+        <widget class="QWidget" name="Stage4Screen"/>
+        <widget class="QWidget" name="Stage5Screen"/>
+        <widget class="QWidget" name="Stage6Screen"/>
+        <widget class="QWidget" name="Stage7Screen"/>
        </widget>
       </item>
      </layout>
@@ -171,6 +176,12 @@ font-weight:bold;</string>
    <class>StageButton</class>
    <extends>QWidget</extends>
    <header location="global">views/components/stage-button.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ScanStageScreen</class>
+   <extends>QWidget</extends>
+   <header location="global">views/stages/scan-stage-screen.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

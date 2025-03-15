@@ -86,7 +86,7 @@
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>:/stages/undone</pixmap>
+            <pixmap resource="../../../assets/assets.qrc">:/stages/undone</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -206,6 +206,8 @@
    <header location="global">views/components/icon-ratio.hpp</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../../assets/assets.qrc"/>
+ </resources>
  <connections/>
 </ui>

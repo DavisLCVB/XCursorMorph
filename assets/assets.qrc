@@ -4,6 +4,7 @@
         <file alias="test:white">icons/test-white.svg</file>
         <file alias="arrow:right:white">icons/arrow-right-white.svg</file>
         <file alias="arrow:right:gray">icons/arrow-right-gray.svg</file>
+        <file alias="scan:white">icons/scan-white.svg</file>
     </qresource> 
     <qresource>
         <file alias="favicon">favicon.svg</file>
