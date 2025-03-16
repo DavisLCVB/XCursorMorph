@@ -2,6 +2,7 @@
 #define SCAN_STAGE_SCREEN_HPP
 
 #include <QGridLayout>
+#include <QMovie>
 #include <QPushButton>
 #include <QResizeEvent>
 #include <QVector>
@@ -21,6 +22,8 @@ class ScanStageScreen : public QWidget {
   QPushButton* ScanButton() const;
   QWidget* CursorsContainer() const;
   void setCursors(const QVector<QString>& cursors);
+  void resetScanButton();
+  void onScanButtonPressed();
 
  protected:
   void resizeEvent(QResizeEvent* event) override;
@@ -31,6 +34,7 @@ class ScanStageScreen : public QWidget {
   Ui::ScanStageScreen* ui;
   QVector<QString> __cursors;
   QGridLayout* __layout;
+  QMovie* __movie = nullptr;
   void __fillGrid(i32 width);
 };
 

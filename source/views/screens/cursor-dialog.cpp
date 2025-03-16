@@ -20,6 +20,10 @@ CursorDialog::~CursorDialog() {
   delete ui;
 }
 
+HeaderComponent* CursorDialog::Header() const {
+  return ui->Header;
+}
+
 void CursorDialog::setCursor(const QString& cursor) {
   try {
     const auto cacheDir = State::instance().cacheDirectory();

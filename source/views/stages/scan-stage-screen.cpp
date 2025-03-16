@@ -1,6 +1,7 @@
 #include "scan-stage-screen.hpp"
 #include "ui_scan-stage-screen.h"
 
+#include <QDebug>
 #include <QGraphicsDropShadowEffect>
 #include <QGridLayout>
 #include <QRect>
@@ -24,6 +25,9 @@ ScanStageScreen::ScanStageScreen(QWidget* parent)
 
 ScanStageScreen::~ScanStageScreen() {
   delete ui;
+  if (__movie) {
+    __movie->deleteLater();
+  }
 }
 
 QPushButton* ScanStageScreen::ScanButton() const {
@@ -102,9 +106,39 @@ void ScanStageScreen::onCursorButtonPressed(const QString& cursor) {
   QRect windowG = window()->geometry();
   dialog->move(windowG.center() - dialogG.center());
   overlay->move(windowG.topLeft());
+  dialog->Header()->setTitle("Cursor Information");
   connect(dialog, &CursorDialog::finished, window(),
           [this, overlay] { overlay->hide(); });
   overlay->show();
   dialog->exec();
   overlay->deleteLater();
+}
+
+void ScanStageScreen::onScanButtonPressed() {
+  if (__movie) {
+    __movie->stop();
+    __movie->deleteLater();
+    __movie = nullptr;
+  }
+  __movie = new QMovie(":/gif/scan:white:anim");
+  ui->ScanButton->setIconSize(QSize(16, 16));
+  connect(__movie, &QMovie::frameChanged, ui->ScanButton, [this]() {
+    ui->ScanButton->setIcon(QIcon(__movie->currentPixmap()));
+  });
+  if (__movie) {
+    __movie->start();
+  }
+  ui->ScanButton->setDisabled(true);
+  ui->ScanButton->setText(" Scanning...");
+}
+
+void ScanStageScreen::resetScanButton() {
+  if (__movie) {
+    __movie->stop();
+    __movie->deleteLater();
+    __movie = nullptr;
+  }
+  ui->ScanButton->setIcon(QIcon(":/icons/scan:white"));
+  ui->ScanButton->setText("Scan");
+  ui->ScanButton->setDisabled(false);
 }

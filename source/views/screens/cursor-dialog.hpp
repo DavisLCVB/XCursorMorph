@@ -6,6 +6,7 @@
 #include <models/formats/animated-cursor.hpp>
 #include <models/formats/static-cursor.hpp>
 #include <types.hpp>
+#include <views/components/header-component.hpp>
 
 namespace Ui {
 class CursorDialog;
@@ -18,6 +19,7 @@ class CursorDialog : public QDialog {
   explicit CursorDialog(QWidget* parent = nullptr);
   ~CursorDialog();
   void setCursor(const QString& cursor);
+  HeaderComponent* Header() const;
 
  private slots:
   void onCloseButtonPressed();

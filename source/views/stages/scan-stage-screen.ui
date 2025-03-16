@@ -107,6 +107,10 @@ QPushButton#ScanButton:hover{
 }
 QPushButton#ScanButton:pressed{
 	background-color: rgb(43, 78, 134)
+}
+QPushButton#ScanButton:disabled{
+	color: #ffffff;
+	background-color: rgb(43, 78, 134);
 }</string>
            </property>
            <property name="text">

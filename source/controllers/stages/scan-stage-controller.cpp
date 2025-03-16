@@ -13,12 +13,13 @@ ScanStageController::ScanStageController(ScanStageScreen* sub, QObject* parent)
 }
 
 void ScanStageController::onPressScanButton() {
+  __sub->onScanButtonPressed();
   QPointer<ScanWorker> worker = new ScanWorker();
   QThread* scanThread = new QThread();
   worker->moveToThread(scanThread);
   connect(scanThread, &QThread::started, worker, &ScanWorker::run);
   connect(worker, &ScanWorker::finish, this,
-          [&](const QVector<QString>& cursors) {
+          [=, this](const QVector<QString>& cursors) {
             scanThread->quit();
             scanThread->wait();
             __finishScan(cursors);
@@ -27,8 +28,8 @@ void ScanStageController::onPressScanButton() {
 }
 
 void ScanStageController::__finishScan(const QVector<QString>& cursors) {
-  qDebug() << "end Scan";
   __sub->setCursors(cursors);
+  __sub->resetScanButton();
 }
 
 ScanWorker::ScanWorker(QObject* parent) : QObject(parent) {}

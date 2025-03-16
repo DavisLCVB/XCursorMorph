@@ -17,4 +17,7 @@
         <file alias="in-progress">icons/in-progress.svg</file>
         <file alias="undone">icons/undone.svg</file>
     </qresource>
+    <qresource prefix="/gif">
+        <file alias="scan:white:anim">gif/scan-white.gif</file>
+    </qresource>
 </RCC>
