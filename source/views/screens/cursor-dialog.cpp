@@ -29,7 +29,7 @@ void CursorDialog::setCursor(const QString& cursor) {
     const auto cacheDir = State::instance().cacheDirectory();
     const QString cacheImagePath =
         cacheDir + "/" + QFileInfo(cursor).fileName() + ".cache.png";
-    if (QFileInfo(cacheImagePath).exists()) {
+    if (QFileInfo(cacheImagePath).exists() && !cursor.endsWith("ani")) {
       ui->IconLabel->setPixmap(QPixmap(cacheImagePath));
       __setText(cursor);
       return;
@@ -49,8 +49,29 @@ void CursorDialog::setCursor(const QString& cursor) {
     }
     if (file.suffix() == "ani") {
       AnimatedCursor a_cursor = AnimatedCursor::fromPath(cursor);
-      a_cursor.frames().front().entries().back().toPng(cacheImagePath);
-      ui->IconLabel->setPixmap(QPixmap(cacheImagePath));
+      const QString baseImagePath =
+          cacheDir + "/" + a_cursor.name() + "/" + a_cursor.name() + ".";
+      __pixmaps.clear();
+      u64 index{0};
+      for (const auto& frame : a_cursor.frames()) {
+        const QString pngPath = baseImagePath + QString::number(index) + ".png";
+        frame.entries().back().toPng(pngPath);
+        __pixmaps.push_back(QPixmap(pngPath));
+        ++index;
+      }
+      if (__timer) {
+        __timer->stop();
+        delete __timer;
+        __timer = nullptr;
+      }
+      __currFrame = 0;
+      __timer = new QTimer(this);
+      __timer->setInterval(50);
+      connect(__timer, &QTimer::timeout, this, [this]() {
+        ui->IconLabel->setPixmap(__pixmaps[__currFrame]);
+        __currFrame = (__currFrame + 1) % __pixmaps.size();
+      });
+      __timer->start(50);
       __setText(cursor);
       return;
     }

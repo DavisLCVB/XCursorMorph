@@ -12,6 +12,7 @@ class StaticCursor {
   static StaticCursor fromData(const QByteArray& data);
   static StaticCursor fromPath(const QString& path);
   const QVector<CursorEntry>& entries() const;
+  QString name() const;
 
  private:
   explicit StaticCursor(const QString& path, const QByteArray& data);

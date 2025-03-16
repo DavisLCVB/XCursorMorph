@@ -5,7 +5,7 @@
 IconRatio::IconRatio(QWidget* parent, f32 ratio)
     : QLabel(parent), __ratio(ratio) {
   setScaledContents(true);
-  setSizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
+  setSizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
 }
 
 i32 IconRatio::heightForWidth(i32 width) const {

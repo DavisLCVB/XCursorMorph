@@ -2,7 +2,10 @@
 #define CURSOR_DIALOG_HPP
 
 #include <QDialog>
+#include <QPixmap>
 #include <QString>
+#include <QTimer>
+#include <QVector>
 #include <models/formats/animated-cursor.hpp>
 #include <models/formats/static-cursor.hpp>
 #include <types.hpp>
@@ -29,6 +32,9 @@ class CursorDialog : public QDialog {
   void __setText(const QString& cursorPath);
   void __fillStaticCursor(const StaticCursor& cursor, const QString& fileName,
                           const u64 size);
+  QVector<QPixmap> __pixmaps;
+  i64 __currFrame{0};
+  QTimer* __timer = nullptr;
 };
 
 #endif  // CURSOR_DIALOG_HPP

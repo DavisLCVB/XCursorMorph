@@ -63,3 +63,7 @@ void StaticCursor::__readEntries() {
     __entries.append(entry);
   }
 }
+
+QString StaticCursor::name() const {
+  return __path.split('/').last().split('.').first();
+}

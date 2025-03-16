@@ -11,6 +11,7 @@ class AnimatedCursor {
   static AnimatedCursor fromData(const QByteArray& data);
   static AnimatedCursor fromPath(const QString& path);
   const QVector<StaticCursor>& frames() const;
+  const QString& name() const;
 
  private:
   AnimatedCursor(const QByteArray& data, const QString& path);

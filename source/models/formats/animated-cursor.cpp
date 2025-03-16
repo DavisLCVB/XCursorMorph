@@ -52,3 +52,7 @@ void AnimatedCursor::__readChunks() {
 const QVector<StaticCursor>& AnimatedCursor::frames() const {
   return __frames;
 }
+
+const QString& AnimatedCursor::name() const {
+  return __path.split('/').back().split('.').first();
+}

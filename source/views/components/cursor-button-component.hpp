@@ -3,9 +3,12 @@
 
 #include <QMap>
 #include <QMouseEvent>
+#include <QPixmap>
 #include <QResizeEvent>
 #include <QString>
+#include <QVector>
 #include <QWidget>
+#include <types.hpp>
 
 namespace Ui {
 class CursorButtonComponent;
@@ -31,6 +34,9 @@ class CursorButtonComponent : public QWidget {
   Ui::CursorButtonComponent* ui;
   static QString __pressedStyle;
   static QString __normalStyle;
+  QVector<QPixmap> __pixmaps;
+  QTimer* __timer = nullptr;
+  i64 __currFrame{0};
 };
 
 #endif  // CURSOR_BUTTON_COMPONENT_HPP

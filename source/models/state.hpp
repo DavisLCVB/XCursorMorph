@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include <QPointer>
+#include <QString>
+#include <QVector>
+#include <models/formats/animated-cursor.hpp>
+#include <models/formats/static-cursor.hpp>
 
 enum class FolderType {
   CurFolder,
@@ -28,6 +32,7 @@ class State final : public QObject {
   QString cacheDirectory() const;
   QString staticCursorsFolder(FolderType folderType) const;
   QString animatedCursorsFolder(FolderType folderType) const;
+  void setCursors(const QVector<QString>& cursors);
 
  private:
   static QPointer<State> __instance;
@@ -35,6 +40,8 @@ class State final : public QObject {
   ~State() = default;
   QString __workingDirectory;
   QString __buildDirectory;
+  QVector<StaticCursor> __staticCursors;
+  QVector<AnimatedCursor> __animatedCursors;
 };
 
 #endif  // STATE_HPP

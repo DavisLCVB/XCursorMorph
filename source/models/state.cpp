@@ -54,3 +54,15 @@ QString State::animatedCursorsFolder(FolderType folderType) const {
       return "";
   }
 }
+
+void State::setCursors(const QVector<QString>& cursors) {
+  __staticCursors.clear();
+  __animatedCursors.clear();
+  for (const auto& cursor : cursors) {
+    if (cursor.endsWith(".cur")) {
+      __staticCursors.push_back(StaticCursor::fromPath(cursor));
+    } else if (cursor.endsWith(".ani")) {
+      __animatedCursors.push_back(AnimatedCursor::fromPath(cursor));
+    }
+  }
+}

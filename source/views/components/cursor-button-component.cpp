@@ -4,6 +4,7 @@
 #include <QFileInfo>
 #include <QStyle>
 #include <QTimer>
+#include <exceptions/xerror.hpp>
 #include <models/formats/animated-cursor.hpp>
 #include <models/formats/static-cursor.hpp>
 #include <models/state.hpp>
@@ -29,36 +30,67 @@ CursorButtonComponent::~CursorButtonComponent() {
 void CursorButtonComponent::setIcon(const QString& icon) {
   try {
     const auto cacheDir = State::instance().cacheDirectory();
+    const QFileInfo file(icon);
+    const QString baseName = file.fileName().split('.').first();
     const QString cacheImagePath =
-        cacheDir + "/" + QFileInfo(icon).fileName() + ".cache.png";
-    if (QFileInfo(cacheImagePath).exists()) {
+        cacheDir + "/" + file.fileName() + ".cache.png";
+    if (QFileInfo(cacheImagePath).exists() && !icon.endsWith("ani")) {
       ui->IconLabel->setPixmap(QPixmap(cacheImagePath));
-      ui->TextLabel->setText(QFileInfo(icon).fileName().split('.').first());
+      ui->TextLabel->setText(baseName);
       return;
     }
-    auto file = QFileInfo(icon);
     if (!file.exists()) {
       ui->IconLabel->setPixmap(QPixmap(":/icons/fallback"));
       ui->TextLabel->setText(icon);
+      return;
     }
     if (file.suffix() == "cur") {
       StaticCursor cursor = StaticCursor::fromPath(icon);
       cursor.entries().back().toPng(cacheImagePath);
       ui->IconLabel->setPixmap(QPixmap(cacheImagePath));
-      ui->TextLabel->setText(file.fileName().split('.').first());
+      ui->TextLabel->setText(baseName);
       return;
     }
     if (file.suffix() == "ani") {
       AnimatedCursor cursor = AnimatedCursor::fromPath(icon);
-      cursor.frames().front().entries().back().toPng(cacheImagePath);
-      ui->IconLabel->setPixmap(QPixmap(cacheImagePath));
-      ui->TextLabel->setText(
-          file.fileName().split('.').first().split('.').first());
+      const QString baseImagePath =
+          cacheDir + "/" + cursor.name() + "/" + cursor.name() + ".";
+      __pixmaps.clear();
+      u64 index{0};
+      for (const auto& frame : cursor.frames()) {
+        const QString pngPath = baseImagePath + QString::number(index) + ".png";
+        frame.entries().back().toPng(pngPath);
+        __pixmaps.push_back(QPixmap(pngPath));
+        ++index;
+      }
+      if (__timer) {
+        __timer->stop();
+        delete __timer;
+        __timer = nullptr;
+      }
+      __currFrame = 0;
+      __timer = new QTimer(this);
+      __timer->setInterval(50);
+      connect(__timer, &QTimer::timeout, this, [this]() {
+        ui->IconLabel->setPixmap(__pixmaps[__currFrame]);
+        __currFrame = (__currFrame + 1) % __pixmaps.size();
+      });
+      __timer->start(50);
+      ui->TextLabel->setText(baseName.split('.').first());
       return;
     }
     ui->IconLabel->setPixmap(QPixmap(":/icons/fallback"));
-    ui->TextLabel->setText(file.fileName().split('.').first());
+    ui->TextLabel->setText(baseName);
+  } catch (XError& e) {
+    e.printFormated();
+    ui->IconLabel->setPixmap(QPixmap(":/icons/fallback"));
+    ui->TextLabel->setText(icon);
+  } catch (std::exception& e) {
+    qDebug() << e.what();
+    ui->IconLabel->setPixmap(QPixmap(":/icons/fallback"));
+    ui->TextLabel->setText(icon);
   } catch (...) {
+    qDebug() << "Unknown error";
     ui->IconLabel->setPixmap(QPixmap(":/icons/fallback"));
     ui->TextLabel->setText(icon);
   }
@@ -97,6 +129,8 @@ void CursorButtonComponent::resizeEvent(QResizeEvent* event) {
     setMinimumWidth(newWidth);
     setMaximumWidth(newWidth);
   }
+  ui->IconLabel->setMinimumSize(
+      size - QSize(size.width() * 5 / 7, size.height() * 5 / 7));
   QWidget::resizeEvent(event);
 }
 
