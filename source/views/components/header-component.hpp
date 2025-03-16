@@ -13,10 +13,12 @@ class HeaderComponent : public QWidget {
   Q_OBJECT
 
  public:
-  explicit HeaderComponent(QWidget* parent = nullptr);
+  explicit HeaderComponent(QWidget* parent = nullptr,
+                           QWidget* window = nullptr);
   ~HeaderComponent();
   void setTitle(const QString& title);
   void setIcon(const QString& icon);
+  void setWindow(QWidget* window);
 
  protected:
   void mousePressEvent(QMouseEvent* event) override;
@@ -27,6 +29,7 @@ class HeaderComponent : public QWidget {
   Ui::HeaderComponent* ui;
   bool __isMooving = false;
   QPoint __lastPosition;
+  QWidget* __window = nullptr;
 };
 
 #endif  // HEADER_HPP

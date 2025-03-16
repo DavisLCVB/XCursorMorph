@@ -5,6 +5,9 @@
         <file alias="arrow:right:white">icons/arrow-right-white.svg</file>
         <file alias="arrow:right:gray">icons/arrow-right-gray.svg</file>
         <file alias="scan:white">icons/scan-white.svg</file>
+        <file alias="fallback">icons/fallback-cursor.svg</file>
+        <file alias="arrow:up:white">icons/arrow-up-white.svg</file>
+        <file alias="arrow:down:white">icons/arrow-down-white.svg</file>
     </qresource> 
     <qresource>
         <file alias="favicon">favicon.svg</file>

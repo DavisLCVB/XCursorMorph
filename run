@@ -16,6 +16,9 @@ if [ "$arg1" == "tests" ]; then
 elif [ "$arg1" == "main" ]; then
     echo "Running main"
     cmake --build build --preset=Debug --target XCursorMorph && ./build/Debug/XCursorMorph
+elif [ "$arg1" == "build" ]; then
+    echo "Building"
+    cmake --build build --preset=Debug
 else
     echo "Invalid argument"
 fi

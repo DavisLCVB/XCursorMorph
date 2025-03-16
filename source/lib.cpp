@@ -2,7 +2,6 @@
 #include <QApplication>
 #include <QDebug>
 #include <metadata/meta.hpp>
-#include <models/static-cursor.hpp>
 #include <mutex>
 
 #include <controllers/main-controller.hpp>

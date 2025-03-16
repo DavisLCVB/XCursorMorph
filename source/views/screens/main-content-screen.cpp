@@ -19,3 +19,7 @@ MainContentScreen::MainContentScreen(QWidget* parent)
 MainContentScreen::~MainContentScreen() {
   delete ui;
 }
+
+ScanStageScreen* MainContentScreen::Stage1Screen() const {
+  return ui->Stage1Screen;
+}

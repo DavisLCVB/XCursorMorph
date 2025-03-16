@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileDialog>
+#include <models/state.hpp>
 
 QString SelectFolderController::__folderInputErrorStyle =
     "QLineEdit#FolderInput{"
@@ -77,5 +78,6 @@ void SelectFolderController::onPressAcceptButton() {
   }
   __sub->FolderInput()->setStyleSheet(__folderInputStyle);
   qInfo() << "Working on directory: " << __folderPath;
+  State::instance().setWorkingDirectory(__folderPath);
   emit folderSelected();
 }

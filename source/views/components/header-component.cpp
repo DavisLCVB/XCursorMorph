@@ -1,8 +1,8 @@
 #include "header-component.hpp"
 #include "ui_header-component.h"
 
-HeaderComponent::HeaderComponent(QWidget* parent)
-    : QWidget(parent), ui(new Ui::HeaderComponent) {
+HeaderComponent::HeaderComponent(QWidget* parent, QWidget* window)
+    : QWidget(parent), ui(new Ui::HeaderComponent), __window(window) {
   ui->setupUi(this);
   ui->TitleLabel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
   ui->IconLabel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
@@ -15,14 +15,14 @@ HeaderComponent::~HeaderComponent() {
 void HeaderComponent::mousePressEvent(QMouseEvent* event) {
   if (event->button() == Qt::LeftButton) {
     __isMooving = true;
-    __lastPosition = event->globalPosition().toPoint() - window()->pos();
+    __lastPosition = event->globalPosition().toPoint() - __window->pos();
     setCursor(Qt::DragMoveCursor);
   }
 }
 
 void HeaderComponent::mouseMoveEvent(QMouseEvent* event) {
   if (__isMooving && (event->buttons() && Qt::LeftButton)) {
-    window()->move(event->globalPosition().toPoint() - __lastPosition);
+    __window->move(event->globalPosition().toPoint() - __lastPosition);
     event->accept();
   }
 }
@@ -39,4 +39,8 @@ void HeaderComponent::setTitle(const QString& title) {
 
 void HeaderComponent::setIcon(const QString& icon) {
   ui->IconLabel->setPixmap(QPixmap(icon));
+}
+
+void HeaderComponent::setWindow(QWidget* window) {
+  __window = window;
 }

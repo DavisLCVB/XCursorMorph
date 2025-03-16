@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget* parent)
           &MainWindow::maximizeRestoreWindow);
   connect(ui->ExitButton, &QPushButton::clicked, this,
           &MainWindow::closeWindow);
+  ui->Header->setWindow(this);
 }
 
 MainWindow::~MainWindow() {
@@ -50,4 +51,8 @@ MainContentScreen* MainWindow::MainContent() const {
 
 HeaderComponent* MainWindow::Header() const {
   return ui->Header;
+}
+
+QWidget* MainWindow::Central() const {
+  return ui->Central;
 }

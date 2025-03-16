@@ -4,7 +4,7 @@
 #include <QByteArray>
 #include <QString>
 #include <QVector>
-#include <models/cursor-entry.hpp>
+#include <models/formats/cursor-entry.hpp>
 #include <types.hpp>
 
 class StaticCursor {

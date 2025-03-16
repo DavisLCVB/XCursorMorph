@@ -2,7 +2,7 @@
 
 #include <QFile>
 #include <exceptions/xerror.hpp>
-#include <models/animated-cursor.hpp>
+#include <models/formats/animated-cursor.hpp>
 
 void AnimatedCursorTest::testFromData() {
   QString path = "/home/davis/Dev/XCursorMorph/cursors/busy.ani";
@@ -23,7 +23,7 @@ void AnimatedCursorTest::testFromData() {
 void AnimatedCursorTest::testFromPath() {
   try {
     QString path = "/home/davis/Dev/XCursorMorph/cursors/busy.ani";
-    auto cursor = AnimatedCursor::fromFile(path);
+    auto cursor = AnimatedCursor::fromPath(path);
     QVERIFY(cursor.frames().size() > 0);
   } catch (XError& e) {
     e.printFormated();
@@ -34,7 +34,7 @@ void AnimatedCursorTest::testFromPath() {
 void AnimatedCursorTest::testToPng() {
   try {
     QString path = "/home/davis/Dev/XCursorMorph/cursors/busy.ani";
-    auto cursor = AnimatedCursor::fromFile(path);
+    auto cursor = AnimatedCursor::fromPath(path);
     auto frames = cursor.frames();
     u64 index{0};
     for (auto& frame : frames) {

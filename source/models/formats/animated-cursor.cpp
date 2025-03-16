@@ -4,13 +4,13 @@
 #include <QDebug>
 #include <QFile>
 #include <exceptions/xerror.hpp>
-#include <models/chunk.hpp>
+#include <models/structs/chunk.hpp>
 
 AnimatedCursor AnimatedCursor::fromData(const QByteArray& data) {
   return AnimatedCursor(data, "no-path");
 }
 
-AnimatedCursor AnimatedCursor::fromFile(const QString& path) {
+AnimatedCursor AnimatedCursor::fromPath(const QString& path) {
   QFile file(path);
   if (!file.exists()) {
     throw new XError(XErrorType::FileNotFound, "File not found: " + path);

@@ -22,6 +22,7 @@ class MainWindow : public QMainWindow {
   SelectFolderScreen* SelectFolder() const;
   MainContentScreen* MainContent() const;
   HeaderComponent* Header() const;
+  QWidget* Central() const;
 
  private:
   Ui::MainWindow* ui;

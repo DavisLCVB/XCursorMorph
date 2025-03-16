@@ -4,7 +4,7 @@
 #include <QFileInfo>
 #include <QImage>
 #include <exceptions/xerror.hpp>
-#include <models/serializer.hpp>
+#include <models/structs/serializer.hpp>
 
 void CursorEntry::setData(const QByteArray& data) {
   __imgData = data;

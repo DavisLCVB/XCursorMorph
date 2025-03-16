@@ -3,6 +3,7 @@
 
 #include <QListWidgetItem>
 #include <QWidget>
+#include <views/stages/scan-stage-screen.hpp>
 
 namespace Ui {
 class MainContentScreen;
@@ -14,6 +15,7 @@ class MainContentScreen : public QWidget {
  public:
   explicit MainContentScreen(QWidget* parent = nullptr);
   ~MainContentScreen();
+  ScanStageScreen* Stage1Screen() const;
 
  private:
   Ui::MainContentScreen* ui;

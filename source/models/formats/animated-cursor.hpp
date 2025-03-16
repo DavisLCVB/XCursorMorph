@@ -4,12 +4,12 @@
 #include <QByteArray>
 #include <QString>
 #include <QVector>
-#include <models/static-cursor.hpp>
+#include <models/formats/static-cursor.hpp>
 
 class AnimatedCursor {
  public:
   static AnimatedCursor fromData(const QByteArray& data);
-  static AnimatedCursor fromFile(const QString& path);
+  static AnimatedCursor fromPath(const QString& path);
   const QVector<StaticCursor>& frames() const;
 
  private:

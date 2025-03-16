@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QFile>
 #include <exceptions/xerror.hpp>
-#include <models/serializer.hpp>
+#include <models/structs/serializer.hpp>
 
 StaticCursor StaticCursor::fromData(const QByteArray& data) {
   return StaticCursor("no-path", data);

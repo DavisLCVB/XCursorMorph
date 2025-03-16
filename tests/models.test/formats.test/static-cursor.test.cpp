@@ -2,7 +2,7 @@
 
 #include <QFile>
 #include <exceptions/xerror.hpp>
-#include <models/static-cursor.hpp>
+#include <models/formats/static-cursor.hpp>
 
 void StaticCursorTest::testFromData() {
   const QString filePath = "/home/davis/Dev/XCursorMorph/cursors/pointer.cur";
