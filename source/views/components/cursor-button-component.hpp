@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 #include <QPixmap>
 #include <QResizeEvent>
+#include <QSize>
 #include <QString>
 #include <QVector>
 #include <QWidget>

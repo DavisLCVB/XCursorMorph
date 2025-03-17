@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>300</height>
+    <width>800</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
 	border-radius: 20px;
 }</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -39,8 +39,8 @@
     <widget class="QWidget" name="Central" native="true">
      <property name="styleSheet">
       <string notr="true">QWidget#Central{
-	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(17, 17, 27, 255), stop:1 rgba(43, 45, 72, 255));
-		border-radius: 20px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(17, 17, 27, 255), stop:1 rgba(43, 45, 72, 255));
+	border-radius: 20px;
 	border: 1px solid gray
 }</string>
      </property>
@@ -74,7 +74,7 @@
           <height>40</height>
          </size>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout" stretch="7,1">
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
          <property name="spacing">
           <number>10</number>
          </property>
@@ -144,6 +144,14 @@ QPushButton:hover{
          </property>
          <item>
           <widget class="QWidget" name="widget_4" native="true">
+           <property name="styleSheet">
+            <string notr="true">QWidget#widget_4{
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(49, 58, 108, 255), stop:1 rgba(87, 53, 108, 255));
+	border-radius: 10px;
+	margin-left: 50px;
+	margin-right: 50px;
+}</string>
+           </property>
            <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1,1">
             <property name="leftMargin">
              <number>0</number>
@@ -172,6 +180,9 @@ QPushButton:hover{
             </item>
             <item>
              <widget class="IconRatio" name="IconLabel">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="text">
                <string/>
               </property>
@@ -194,76 +205,43 @@ QPushButton:hover{
           </widget>
          </item>
          <item>
-          <widget class="QWidget" name="widget_5" native="true">
-           <layout class="QVBoxLayout" name="verticalLayout_2" stretch="2,1,1,1,1,0">
+          <widget class="QWidget" name="TextContainer" native="true">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0,0,0,0">
+            <property name="spacing">
+             <number>10</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>20</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
             <item>
-             <widget class="QLabel" name="Name">
-              <property name="styleSheet">
-               <string notr="true">font-size: 20px;
-font-weight: bold;</string>
-              </property>
-              <property name="text">
-               <string>NoInfoCursor</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignmentFlag::AlignCenter</set>
-              </property>
-             </widget>
+             <widget class="CursorEntryComponent" name="Name" native="true"/>
             </item>
             <item>
-             <widget class="QLabel" name="File">
-              <property name="styleSheet">
-               <string notr="true">font-size: 12pt;
-padding-left: 10px;</string>
-              </property>
-              <property name="text">
-               <string>File: NoInfo  (NoInfo MB)</string>
-              </property>
-             </widget>
+             <widget class="CursorEntryComponent" name="File" native="true"/>
             </item>
             <item>
-             <widget class="QLabel" name="Sizes">
-              <property name="styleSheet">
-               <string notr="true">font-size: 12pt;
-padding-left: 10px;</string>
-              </property>
-              <property name="text">
-               <string>Sizes: NoInfo</string>
-              </property>
-             </widget>
+             <widget class="CursorEntryComponent" name="Sizes" native="true"/>
             </item>
             <item>
-             <widget class="QLabel" name="Hotspots">
-              <property name="styleSheet">
-               <string notr="true">font-size: 12pt;
-padding-left: 10px;</string>
-              </property>
-              <property name="text">
-               <string>Hostspots: NoInfo</string>
-              </property>
-             </widget>
+             <widget class="CursorEntryComponent" name="Hotspots" native="true"/>
             </item>
             <item>
-             <widget class="QLabel" name="Bpps">
-              <property name="styleSheet">
-               <string notr="true">font-size: 12pt;
-padding-left: 10px;</string>
-              </property>
-              <property name="text">
-               <string>BitesPerPixel: NoInfo</string>
-              </property>
-             </widget>
+             <widget class="CursorEntryComponent" name="Bpps" native="true"/>
             </item>
             <item>
-             <widget class="QLabel" name="Frames">
-              <property name="styleSheet">
-               <string notr="true">font-size: 12pt;
-padding-left: 10px;</string>
-              </property>
-              <property name="text">
-               <string>Frames: NoInfo</string>
-              </property>
-             </widget>
+             <widget class="CursorEntryComponent" name="Frames" native="true"/>
             </item>
            </layout>
           </widget>
@@ -286,6 +264,12 @@ padding-left: 10px;</string>
    <class>HeaderComponent</class>
    <extends>QWidget</extends>
    <header location="global">views/components/header-component.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CursorEntryComponent</class>
+   <extends>QWidget</extends>
+   <header location="global">views/components/cursor-entry-component.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
