@@ -3,3 +3,5 @@ build
 .idea
 cursors
 Build
+output.test
+input.test

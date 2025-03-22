@@ -5,6 +5,10 @@ QMap<XErrorType, QString> XError::__typeMap = {
     {XErrorType::FileNotFound, "FileNotFound"},
     {XErrorType::FileNotOpened, "FileNotOpened"},
     {XErrorType::Unknown, "Unknown"},
+    {XErrorType::InvalidData, "InvalidData"},
+    {XErrorType::NotSupported, "NotSupported"},
+    {XErrorType::CreationFailed, "CreationFailed"},
+    {XErrorType::ReadError, "ReadError"},
 };
 
 XError::XError() : XError(__typeMap[XErrorType::Unknown]) {}
@@ -32,4 +36,17 @@ void XError::printFormated() const {
                                  .arg(__message)
                                  .arg(reset);
   qCritical().noquote() << formattedMessage;
+}
+
+XError XError::invalidData(const QString& att, const QString& be,
+                           const QString& toBe) {
+  QString message = QString("Invalid data, %1: %2").arg(att).arg(be);
+  if (!toBe.isEmpty()) {
+    message.append(QString(", should be: %1").arg(toBe));
+  }
+  return XError(XErrorType::InvalidData, message);
+}
+
+XError XError::notSupported(const QString& msg) {
+  return XError(XErrorType::NotSupported, msg);
 }

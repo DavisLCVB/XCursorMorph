@@ -12,7 +12,7 @@ fi
 
 if [ "$arg1" == "tests" ]; then
     echo "Running tests"
-    cmake --build build --preset=Debug --target tests && ./build/Debug/tests/tests
+    cmake --build build --preset=Debug --target tests && ./build/Debug/tests/tests -v2
 elif [ "$arg1" == "main" ]; then
     echo "Running main"
     cmake --build build --preset=Debug --target XCursorMorph && ./build/Debug/XCursorMorph

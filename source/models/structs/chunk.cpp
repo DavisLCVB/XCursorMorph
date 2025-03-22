@@ -3,6 +3,7 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QIODevice>
+#include <exceptions/xerror.hpp>
 
 bool Chunk::read(QDataStream& stream) {
   c8 header[4];
@@ -26,9 +27,14 @@ bool Chunk::read(QDataStream& stream) {
   return true;
 }
 
-void Chunk::parseSubChunks() {
+void Chunk::parseSubChunks(const QString& headerId) {
   if (data.size() <= 4) {
     return;
+  }
+  QString chunkHeaderId = QString::fromLatin1(data.data(), 4);
+  if (headerId != "--none" && chunkHeaderId != headerId) {
+    throw XError(XErrorType::InvalidData,
+                 "Invalid subchunk header: " + headerId);
   }
   QByteArray subData = data.mid(4);
   QBuffer buffer(&subData);

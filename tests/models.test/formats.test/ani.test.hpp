@@ -1,10 +1,10 @@
-#ifndef ANIMATED_CURSOR_H
-#define ANIMATED_CURSOR_H
+#ifndef ANI_TEST_HPP
+#define ANI_TEST_HPP
 
 #include <QObject>
 #include <QtTest/QtTest>
 
-class AnimatedCursorTest final : public QObject {
+class ANITest : public QObject {
   Q_OBJECT
  private slots:
   void testFromData();
@@ -12,4 +12,4 @@ class AnimatedCursorTest final : public QObject {
   void testToPng();
 };
 
-#endif  // ANIMATED_CURSOR_H
+#endif  // ANI_TEST_HPP

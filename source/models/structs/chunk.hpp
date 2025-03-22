@@ -15,7 +15,7 @@ class Chunk {
   Chunk() = default;
 
   bool read(QDataStream& stream);
-  void parseSubChunks();
+  void parseSubChunks(const QString& headerId = "--none");
 };
 
 #endif  // CHUNK_HPP

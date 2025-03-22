@@ -22,6 +22,9 @@ class XError {
   QString message() const;
   XErrorType type() const;
   void printFormated() const;
+  static XError invalidData(const QString& att, const QString& be,
+                            const QString& toBe = "");
+  static XError notSupported(const QString& msg);
 
  private:
   static QMap<XErrorType, QString> __typeMap;

@@ -16,7 +16,6 @@ void HeaderComponent::mousePressEvent(QMouseEvent* event) {
   if (event->button() == Qt::LeftButton) {
     __isMooving = true;
     __lastPosition = event->globalPosition().toPoint() - __window->pos();
-    setCursor(Qt::DragMoveCursor);
   }
 }
 
@@ -30,7 +29,6 @@ void HeaderComponent::mouseMoveEvent(QMouseEvent* event) {
 void HeaderComponent::mouseReleaseEvent(QMouseEvent* event) {
   __isMooving = false;
   event->accept();
-  setCursor(Qt::ArrowCursor);
 }
 
 void HeaderComponent::setTitle(const QString& title) {
