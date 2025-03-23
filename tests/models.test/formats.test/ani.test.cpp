@@ -20,7 +20,7 @@ void ANITest::testFromData() {
 void ANITest::testFromPath() {
   try {
     const QString path = "/home/davis/Dev/XCursorMorph/input.test/busy.ani";
-    ANI ani = ANI::fromPath(path);
+    ANI ani = ANI::fromFile(path);
     QVERIFY(ani.frames().size() > 0);
   } catch (XError& e) {
     e.printFormated();
@@ -31,7 +31,7 @@ void ANITest::testFromPath() {
 void ANITest::testToPng() {
   try {
     const QString path = "/home/davis/Dev/XCursorMorph/input.test/busy.ani";
-    ANI ani = ANI::fromPath(path);
+    ANI ani = ANI::fromFile(path);
     QVERIFY(ani.frames().size() > 0);
     const QString prefix = "/home/davis/Dev/XCursorMorph/output.test/busy";
     i64 i{0};

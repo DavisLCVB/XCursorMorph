@@ -60,9 +60,9 @@ void State::setCursors(const QVector<QString>& cursors) {
   __animatedCursors.clear();
   for (const auto& cursor : cursors) {
     if (cursor.endsWith(".cur")) {
-      __staticCursors.push_back(StaticCursor::fromPath(cursor));
+      __staticCursors.push_back(StaticCursor::fromFile(cursor));
     } else if (cursor.endsWith(".ani")) {
-      __animatedCursors.push_back(AnimatedCursor::fromPath(cursor));
+      __animatedCursors.push_back(AnimatedCursor::fromFile(cursor));
     }
   }
 }

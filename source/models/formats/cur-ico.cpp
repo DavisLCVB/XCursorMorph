@@ -55,6 +55,12 @@ QByteArray CUR_ICOEntry::data() const {
   return __data;
 }
 
+u32 CUR_ICOEntry::bitsPerPixel() {
+  __rebuildBMPHeader();
+  BMP bmp = BMP::fromData(__data);
+  return bmp.bitsPerPixel();
+}
+
 void CUR_ICOEntry::toPng(const QString& path) {
   __rebuildBMPHeader();
   BMP bmp = BMP::fromData(__data);

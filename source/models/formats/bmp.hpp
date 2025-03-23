@@ -9,6 +9,7 @@ class BMP {
  public:
   static BMP fromData(const QByteArray& data);
   static BMP fromFile(const QString& path);
+  u32 bitsPerPixel() const;
   void toPng(const QString& path) const;
   void save(const QString& path) const;
   ~BMP() = default;

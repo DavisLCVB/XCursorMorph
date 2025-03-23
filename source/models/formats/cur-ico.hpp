@@ -21,6 +21,7 @@ class CUR_ICOEntry final : public IEntry {
   u32 size() const;
   u32 offset() const;
   QByteArray data() const;
+  u32 bitsPerPixel();
   CUR_ICOEntry() = default;
   ~CUR_ICOEntry() = default;
   void toPng(const QString& path) override;

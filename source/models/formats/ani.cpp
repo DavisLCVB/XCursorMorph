@@ -36,7 +36,7 @@ ANI ANI::fromData(const QByteArray& data) {
   return ANI(data);
 }
 
-ANI ANI::fromPath(const QString& path) {
+ANI ANI::fromFile(const QString& path) {
   QFile file(path);
   if (!file.open(QIODevice::ReadOnly)) {
     throw XError(XErrorType::FileNotOpened, "Failed to open file, " + path);

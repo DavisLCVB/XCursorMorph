@@ -170,3 +170,7 @@ void BMP::save(const QString& path) const {
   }
   file.close();
 }
+
+u32 BMP::bitsPerPixel() const {
+  return __bitsPerPixel;
+}

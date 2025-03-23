@@ -27,7 +27,7 @@ class ANIFrame {
 class ANI {
  public:
   static ANI fromData(const QByteArray& data);
-  static ANI fromPath(const QString& path);
+  static ANI fromFile(const QString& path);
   QVector<ANIFrame> frames() const;
 
  private:

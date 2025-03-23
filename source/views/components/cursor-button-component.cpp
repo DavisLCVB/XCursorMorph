@@ -5,9 +5,9 @@
 #include <QStyle>
 #include <QTimer>
 #include <exceptions/xerror.hpp>
-#include <models/formats/animated-cursor.hpp>
-#include <models/formats/static-cursor.hpp>
+#include <models/animated-cursor.hpp>
 #include <models/state.hpp>
+#include <models/static-cursor.hpp>
 
 CursorButtonComponent::CursorButtonComponent(QWidget* parent)
     : QWidget(parent), ui(new Ui::CursorButtonComponent) {
@@ -29,39 +29,24 @@ CursorButtonComponent::~CursorButtonComponent() {
 
 void CursorButtonComponent::setIcon(const QString& icon) {
   try {
-    const auto cacheDir = State::instance().cacheDirectory();
     const QFileInfo file(icon);
-    const QString baseName = file.fileName().split('.').first();
-    const QString cacheImagePath =
-        cacheDir + "/" + file.fileName() + ".cache.png";
-    if (QFileInfo(cacheImagePath).exists() && !icon.endsWith("ani")) {
-      ui->IconLabel->setPixmap(QPixmap(cacheImagePath));
-      ui->TextLabel->setText(baseName);
-      return;
-    }
+    const QString baseName = file.baseName();
     if (!file.exists()) {
       ui->IconLabel->setPixmap(QPixmap(":/icons/fallback"));
       ui->TextLabel->setText(icon);
       return;
     }
     if (file.suffix() == "cur") {
-      StaticCursor cursor = StaticCursor::fromPath(icon);
-      cursor.entries().back().toPng(cacheImagePath);
+      QString cacheImagePath = StaticCursor::fromFile(icon).getPrev();
       ui->IconLabel->setPixmap(QPixmap(cacheImagePath));
       ui->TextLabel->setText(baseName);
       return;
     }
     if (file.suffix() == "ani") {
-      AnimatedCursor cursor = AnimatedCursor::fromPath(icon);
-      const QString baseImagePath =
-          cacheDir + "/" + cursor.name() + "/" + cursor.name() + ".";
+      QVector<QString> paths = AnimatedCursor::fromFile(icon).getPrev();
       __pixmaps.clear();
-      u64 index{0};
-      for (const auto& frame : cursor.frames()) {
-        const QString pngPath = baseImagePath + QString::number(index) + ".png";
-        frame.entries().back().toPng(pngPath);
-        __pixmaps.push_back(QPixmap(pngPath));
-        ++index;
+      for (const auto& path : paths) {
+        __pixmaps.push_back(QPixmap(path));
       }
       if (__timer) {
         __timer->stop();

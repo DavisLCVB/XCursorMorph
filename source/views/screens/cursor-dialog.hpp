@@ -6,8 +6,8 @@
 #include <QString>
 #include <QTimer>
 #include <QVector>
-#include <models/formats/animated-cursor.hpp>
-#include <models/formats/static-cursor.hpp>
+#include <models/animated-cursor.hpp>
+#include <models/static-cursor.hpp>
 #include <types.hpp>
 #include <views/components/header-component.hpp>
 
@@ -32,6 +32,8 @@ class CursorDialog : public QDialog {
   void __setText(const QString& cursorPath);
   void __fillStaticCursor(const StaticCursor& cursor, const QString& fileName,
                           const u64 size);
+  void __fillAnimatedCursor(const AnimatedCursor& cursor,
+                            const QString& fileName, const u64 size);
   QVector<QPixmap> __pixmaps;
   i64 __currFrame{0};
   QTimer* __timer = nullptr;

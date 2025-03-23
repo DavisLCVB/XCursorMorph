@@ -34,14 +34,6 @@ HeaderComponent* CursorDialog::Header() const {
 
 void CursorDialog::setCursor(const QString& cursor) {
   try {
-    const auto cacheDir = State::instance().cacheDirectory();
-    const QString cacheImagePath =
-        cacheDir + "/" + QFileInfo(cursor).fileName() + ".cache.png";
-    if (QFileInfo(cacheImagePath).exists() && !cursor.endsWith("ani: ")) {
-      ui->IconLabel->setPixmap(QPixmap(cacheImagePath));
-      __setText(cursor);
-      return;
-    }
     auto file = QFileInfo(cursor);
     if (!file.exists()) {
       ui->IconLabel->setPixmap(QPixmap(":/icons/fallback"));
@@ -49,25 +41,16 @@ void CursorDialog::setCursor(const QString& cursor) {
       return;
     }
     if (file.suffix() == "cur") {
-      StaticCursor s_cursor = StaticCursor::fromPath(cursor);
-      s_cursor.entries().back().toPng(cacheImagePath);
+      QString cacheImagePath = StaticCursor::fromFile(cursor).getPrev();
       ui->IconLabel->setPixmap(QPixmap(cacheImagePath));
       __setText(cursor);
       return;
     }
     if (file.suffix() == "ani") {
-      AnimatedCursor a_cursor = AnimatedCursor::fromPath(cursor);
-      const QString baseImagePath =
-          cacheDir + "/" + a_cursor.name() + "/" + a_cursor.name() + ".";
+      QVector<QString> paths = AnimatedCursor::fromFile(cursor).getPrev();
       __pixmaps.clear();
-      u64 index{0};
-      for (const auto& frame : a_cursor.frames()) {
-        const QString pngPath = baseImagePath + QString::number(index) + ".png";
-        if (!QFileInfo(pngPath).exists()) {
-          frame.entries().back().toPng(pngPath);
-        }
-        __pixmaps.push_back(QPixmap(pngPath));
-        ++index;
+      for (const auto& path : paths) {
+        __pixmaps.push_back(QPixmap(path));
       }
       if (__timer) {
         __timer->stop();
@@ -100,14 +83,13 @@ void CursorDialog::__setText(const QString& cursorPath) {
   const QString fileName = file.fileName();
   const u64 fileSize = file.size() / 1024;
   if (suffix == "cur") {
-    StaticCursor cursor = StaticCursor::fromPath(cursorPath);
+    StaticCursor cursor = StaticCursor::fromFile(cursorPath);
     __fillStaticCursor(cursor, fileName, fileSize);
     ui->Frames->hide();
   }
   if (suffix == "ani") {
-    AnimatedCursor cursor = AnimatedCursor::fromPath(cursorPath);
-    __fillStaticCursor(cursor.frames().front(), fileName, fileSize);
-    ui->Frames->setDataValue(QString::number(cursor.frames().size()));
+    AnimatedCursor cursor = AnimatedCursor::fromFile(cursorPath);
+    __fillAnimatedCursor(cursor, fileName, fileSize);
   }
 }
 
@@ -116,15 +98,49 @@ void CursorDialog::__fillStaticCursor(const StaticCursor& cursor,
   const QString name = QString("%1").arg(fileName.split('.').first());
   const QString file = QString("%1 (%2 KB)").arg(fileName).arg(size);
   const QString bpps =
-      QString("%1").arg(cursor.entries().back().bytesPerPixel());
+      QString("%1").arg(cursor.entries().front().bitsPerPixel());
   ui->Name->setDataValue(name);
   ui->File->setDataValue(file);
   ui->Bpps->setDataValue(bpps);
   auto widgetSize = new MiniLabelContainer(ui->Sizes);
   auto widgetHotspot = new MiniLabelContainer(ui->Hotspots);
   for (const auto& entry : cursor.entries()) {
-    auto size = QString("%1x%2").arg(entry.width()).arg(entry.height());
-    auto hotspot = QString("%1x%2").arg(entry.hotspotX()).arg(entry.hotspotY());
+    auto size = QString("%1x%2")
+                    .arg(entry.dimension().first)
+                    .arg(entry.dimension().second);
+    auto hotspot =
+        QString("%1x%2").arg(entry.hotspot().first).arg(entry.hotspot().second);
+    auto sizeLabel = new MiniLabelComponent(widgetSize);
+    auto hotspotLabel = new MiniLabelComponent(widgetHotspot);
+    sizeLabel->setText(size);
+    hotspotLabel->setText(hotspot);
+    widgetSize->addMiniLabel(sizeLabel);
+    widgetHotspot->addMiniLabel(hotspotLabel);
+  }
+  ui->Sizes->setDataValue(widgetSize);
+  ui->Hotspots->setDataValue(widgetHotspot);
+}
+
+void CursorDialog::__fillAnimatedCursor(const AnimatedCursor& cursor,
+                                        const QString& fileName,
+                                        const u64 size) {
+  const QString name = QString("%1").arg(fileName.split('.').first());
+  const QString file = QString("%1 (%2 KB)").arg(fileName).arg(size);
+  const QString bpps = QString("%1").arg(
+      cursor.frames().front().entries().front().bitsPerPixel());
+  ui->Name->setDataValue(name);
+  ui->File->setDataValue(file);
+  ui->Bpps->setDataValue(bpps);
+  ui->Frames->setDataValue(QString::number(cursor.frames().size()));
+  const auto fFrame = cursor.frames().front();
+  auto widgetSize = new MiniLabelContainer(ui->Sizes);
+  auto widgetHotspot = new MiniLabelContainer(ui->Hotspots);
+  for (const auto& entry : fFrame.entries()) {
+    auto size = QString("%1x%2")
+                    .arg(entry.dimension().first)
+                    .arg(entry.dimension().second);
+    auto hotspot =
+        QString("%1x%2").arg(entry.hotspot().first).arg(entry.hotspot().second);
     auto sizeLabel = new MiniLabelComponent(widgetSize);
     auto hotspotLabel = new MiniLabelComponent(widgetHotspot);
     sizeLabel->setText(size);
