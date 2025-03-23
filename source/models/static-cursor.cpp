@@ -61,3 +61,15 @@ QString StaticCursor::path() const {
 QString StaticCursor::id() const {
   return __id;
 }
+
+QMap<QString, QString> StaticCursor::cache() {
+  return __cache;
+}
+
+void StaticCursor::setCache(const QMap<QString, QString>& cache) {
+  __cache = cache;
+}
+
+void StaticCursor::clearCache() {
+  __cache.clear();
+}

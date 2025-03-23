@@ -15,6 +15,7 @@ class MainController final : public QObject {
 
  private slots:
   void onFolderSelected();
+  void onFinishScan();
 
  private:
   MainWindow* __sub;
@@ -22,6 +23,8 @@ class MainController final : public QObject {
   QMap<QString, IBaseController*> __stagesControllers;
 
   void __initStages();
+  void __saveState();
+  void __loadState();
 };
 
 #endif  // MAIN_CONTROLLER_HPP

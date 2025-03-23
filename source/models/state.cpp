@@ -66,3 +66,22 @@ void State::setCursors(const QVector<QString>& cursors) {
     }
   }
 }
+
+void State::setPhase(StatePhases phase) {
+  __currentPhase = phase;
+}
+
+StatePhases State::phase() const {
+  return __currentPhase;
+}
+
+QString State::phaseString() const {
+  switch (__currentPhase) {
+    case StatePhases::Scan:
+      return "scan";
+    case StatePhases::Extract:
+      return "extract";
+    default:
+      return "";
+  }
+}

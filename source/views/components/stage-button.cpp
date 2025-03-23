@@ -126,6 +126,7 @@ void StageButton::mousePressEvent(QMouseEvent* event) {
     ui->Content->setStyleSheet(__pressedStyle);
     ui->Content->style()->unpolish(ui->Content);
     ui->Content->style()->polish(ui->Content);
+    emit pressed();
   }
   QWidget::mousePressEvent(event);
 }

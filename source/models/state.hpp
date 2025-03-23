@@ -15,6 +15,11 @@ enum class FolderType {
   BaseFolder,
 };
 
+enum class StatePhases {
+  Scan,
+  Extract,
+};
+
 class State final : public QObject {
   Q_OBJECT
  public:
@@ -33,6 +38,9 @@ class State final : public QObject {
   QString staticCursorsFolder(FolderType folderType) const;
   QString animatedCursorsFolder(FolderType folderType) const;
   void setCursors(const QVector<QString>& cursors);
+  void setPhase(StatePhases phase);
+  StatePhases phase() const;
+  QString phaseString() const;
 
  private:
   static QPointer<State> __instance;
@@ -42,6 +50,7 @@ class State final : public QObject {
   QString __buildDirectory{"."};
   QVector<StaticCursor> __staticCursors;
   QVector<AnimatedCursor> __animatedCursors;
+  StatePhases __currentPhase;
 };
 
 #endif  // STATE_HPP

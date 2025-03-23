@@ -30,6 +30,7 @@ void ScanStageController::onPressScanButton() {
 void ScanStageController::__finishScan(const QVector<QString>& cursors) {
   __sub->setCursors(cursors);
   __sub->resetScanButton();
+  emit finishScan();
 }
 
 ScanWorker::ScanWorker(QObject* parent) : QObject(parent) {}

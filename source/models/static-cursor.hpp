@@ -15,6 +15,9 @@ class StaticCursor {
   QString name() const;
   QString path() const;
   QString id() const;
+  static QMap<QString, QString> cache();
+  static void setCache(const QMap<QString, QString>& cache);
+  static void clearCache();
 
  private:
   StaticCursor(const CUR_ICO& curIco);

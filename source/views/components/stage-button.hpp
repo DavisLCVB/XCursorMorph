@@ -25,6 +25,9 @@ class StageButton : public QWidget {
   void mousePressEvent(QMouseEvent* event) override;
   void mouseReleaseEvent(QMouseEvent* event) override;
 
+ signals:
+  void pressed();
+
  private:
   Ui::StageButton* ui;
   StageButtonState __state;

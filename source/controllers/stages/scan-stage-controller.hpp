@@ -15,6 +15,9 @@ class ScanStageController final : public QObject,
  private slots:
   void onPressScanButton();
 
+ signals:
+  void finishScan();
+
  private:
   void __finishScan(const QVector<QString>& cursors);
 };

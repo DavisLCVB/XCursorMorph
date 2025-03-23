@@ -52,3 +52,15 @@ QString AnimatedCursor::path() const {
 QString AnimatedCursor::id() const {
   return __id;
 }
+
+QMap<QString, QString> AnimatedCursor::cache() {
+  return __cache;
+}
+
+void AnimatedCursor::setCache(const QMap<QString, QString>& cache) {
+  __cache = cache;
+}
+
+void AnimatedCursor::clearCache() {
+  __cache.clear();
+}
