@@ -89,10 +89,14 @@ void MainController::__loadState() {
   StaticCursor::setCache(staticCache);
   AnimatedCursor::setCache(animatedCache);
   const QString currentState = root["current_state"].toString();
+  i32 index{0};
   if (currentState == "scan") {
     State::instance().setPhase(StatePhases::Scan);
+    index = 1;
   } else if (currentState == "extract") {
     State::instance().setPhase(StatePhases::Extract);
+    index = 2;
   }
+  __sub->MainContent()->setStageButtonState(index, StageButtonState::Current);
   qDebug() << "Loaded cache";
 }
