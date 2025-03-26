@@ -2,6 +2,7 @@
 
 #include <QFile>
 #include <QJsonDocument>
+#include <controllers/stages/extract-stage-controller.hpp>
 #include <controllers/stages/scan-stage-controller.hpp>
 #include <metadata/meta.hpp>
 #include <models/animated-cursor.hpp>
@@ -30,11 +31,22 @@ void MainController::__initStages() {
   __stagesControllers["Scan"] = scanStageController;
   connect(scanStageController, &ScanStageController::finishScan, this,
           &MainController::onFinishScan);
+  auto extractStageController =
+      new ExtractStageController(__sub->MainContent()->Stage2Screen());
+  __stagesControllers["Extract"] = extractStageController;
+  connect(extractStageController, &ExtractStageController::finishExtract, this,
+          &MainController::onFinishExtract);
 }
 
 void MainController::onFinishScan() {
   State::instance().setPhase(StatePhases::Extract);
   __sub->MainContent()->setStageButtonState(2, StageButtonState::Current);
+  __saveState();
+}
+
+void MainController::onFinishExtract() {
+  State::instance().setPhase(StatePhases::Edit);
+  __sub->MainContent()->setStageButtonState(3, StageButtonState::Current);
   __saveState();
 }
 
@@ -78,6 +90,7 @@ void MainController::__loadState() {
   const QJsonObject cache = root["cache"].toObject();
   QMap<QString, QString> staticCache;
   QMap<QString, QString> animatedCache;
+  QVector<QString> cursors;
   for (const auto& key : cache.keys()) {
     const QString value = cache[key].toString();
     if (key.endsWith(".cur")) {
@@ -85,7 +98,9 @@ void MainController::__loadState() {
     } else if (key.endsWith(".ani")) {
       animatedCache[key] = value;
     }
+    cursors.append(key);
   }
+  State::instance().setCursors(cursors);
   StaticCursor::setCache(staticCache);
   AnimatedCursor::setCache(animatedCache);
   const QString currentState = root["current_state"].toString();
@@ -96,6 +111,9 @@ void MainController::__loadState() {
   } else if (currentState == "extract") {
     State::instance().setPhase(StatePhases::Extract);
     index = 2;
+  } else if (currentState == "edit") {
+    State::instance().setPhase(StatePhases::Edit);
+    index = 3;
   }
   __sub->MainContent()->setStageButtonState(index, StageButtonState::Current);
   qDebug() << "Loaded cache";

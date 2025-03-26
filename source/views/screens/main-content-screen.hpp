@@ -4,6 +4,7 @@
 #include <QListWidgetItem>
 #include <QWidget>
 #include <views/components/stage-button.hpp>
+#include <views/stages/extract-stage-screen.hpp>
 #include <views/stages/scan-stage-screen.hpp>
 
 namespace Ui {
@@ -17,6 +18,7 @@ class MainContentScreen : public QWidget {
   explicit MainContentScreen(QWidget* parent = nullptr);
   ~MainContentScreen();
   ScanStageScreen* Stage1Screen() const;
+  ExtractStageScreen* Stage2Screen() const;
   void setStageButtonState(int index, StageButtonState state);
 
  private:

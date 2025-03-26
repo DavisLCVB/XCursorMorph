@@ -28,8 +28,25 @@ void ScanStageController::onPressScanButton() {
 }
 
 void ScanStageController::__finishScan(const QVector<QString>& cursors) {
-  __sub->setCursors(cursors);
+  QVector<QString> newPaths;
+  for (const auto& cursor : cursors) {
+    QFileInfo file(cursor);
+    QString path{""};
+    if (file.suffix() == "cur") {
+      path = State::instance().staticCursorsFolder(FolderType::CurFolder) +
+             "/" + file.fileName();
+
+    } else if (file.suffix() == "ani") {
+      path = State::instance().animatedCursorsFolder(FolderType::AniFolder) +
+             "/" + file.fileName();
+    }
+    QDir().mkpath(QFileInfo(path).absolutePath());
+    QFile::copy(cursor, path);
+    newPaths.push_back(path);
+  }
+  __sub->setCursors(newPaths);
   __sub->resetScanButton();
+  State::instance().setCursors(newPaths);
   emit finishScan();
 }
 

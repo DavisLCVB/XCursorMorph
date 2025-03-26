@@ -158,7 +158,7 @@ font-weight:bold;</string>
          <string notr="true">background:transparent;</string>
         </property>
         <widget class="ScanStageScreen" name="Stage1Screen"/>
-        <widget class="QWidget" name="Stage2Screen"/>
+        <widget class="ExtractStageScreen" name="Stage2Screen"/>
         <widget class="QWidget" name="Stage3Screen"/>
         <widget class="QWidget" name="Stage4Screen"/>
         <widget class="QWidget" name="Stage5Screen"/>
@@ -182,6 +182,12 @@ font-weight:bold;</string>
    <class>ScanStageScreen</class>
    <extends>QWidget</extends>
    <header location="global">views/stages/scan-stage-screen.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ExtractStageScreen</class>
+   <extends>QWidget</extends>
+   <header location="global">views/stages/extract-stage-screen.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

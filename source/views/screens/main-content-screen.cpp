@@ -52,6 +52,10 @@ ScanStageScreen* MainContentScreen::Stage1Screen() const {
   return ui->Stage1Screen;
 }
 
+ExtractStageScreen* MainContentScreen::Stage2Screen() const {
+  return ui->Stage2Screen;
+}
+
 void MainContentScreen::setStageButtonState(int index, StageButtonState state) {
   __changeButtonState(index, state);
   StageButtonState prevStage;

@@ -42,8 +42,6 @@ QString State::staticCursorsFolder(FolderType folderType) const {
 
 QString State::animatedCursorsFolder(FolderType folderType) const {
   switch (folderType) {
-    case FolderType::CurFolder:
-      return __buildDirectory + "/Animated/cur";
     case FolderType::PngFolder:
       return __buildDirectory + "/Animated/png";
     case FolderType::AniFolder:
@@ -81,7 +79,17 @@ QString State::phaseString() const {
       return "scan";
     case StatePhases::Extract:
       return "extract";
+    case StatePhases::Edit:
+      return "edit";
     default:
       return "";
   }
+}
+
+QVector<StaticCursor> State::staticCursors() const {
+  return __staticCursors;
+}
+
+QVector<AnimatedCursor> State::animatedCursors() const {
+  return __animatedCursors;
 }

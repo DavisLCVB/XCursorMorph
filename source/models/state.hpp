@@ -18,6 +18,7 @@ enum class FolderType {
 enum class StatePhases {
   Scan,
   Extract,
+  Edit,
 };
 
 class State final : public QObject {
@@ -41,6 +42,8 @@ class State final : public QObject {
   void setPhase(StatePhases phase);
   StatePhases phase() const;
   QString phaseString() const;
+  QVector<StaticCursor> staticCursors() const;
+  QVector<AnimatedCursor> animatedCursors() const;
 
  private:
   static QPointer<State> __instance;

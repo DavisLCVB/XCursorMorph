@@ -16,6 +16,7 @@ class MainController final : public QObject {
  private slots:
   void onFolderSelected();
   void onFinishScan();
+  void onFinishExtract();
 
  private:
   MainWindow* __sub;
